@@ -1,0 +1,7 @@
+root = true
+[*.{js,jsx,ts,tsx,vue}]
+indent_style = tabs
+indent_size = 2
+charest = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
