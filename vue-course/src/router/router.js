@@ -28,6 +28,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
     props: { // 路由传参的对象模式
       food: 'banana'
+    },
+    meta: { // 路由元数据
+      title: '关于'
     }
   },
   { // 动态路由
