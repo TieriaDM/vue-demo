@@ -60,6 +60,10 @@ const routes = [
     //   // }
     //   // return '/'
     // }
+  },
+  { // 所有匹配不到的页面走这里，必须配置在最后面，不会影响前面的匹配
+    path: '*',
+    component: () => import('@/views/Error_404.vue')
   }
 ]
 
