@@ -65,6 +65,10 @@ const routes = [
     name: 'login',
     component: () => import('@/views/Login.vue')
   },
+  {
+    path: '/store',
+    component: () => import('@/views/Store.vue')
+  },
   { // 重定向
     path: '/main',
     redirect: {
