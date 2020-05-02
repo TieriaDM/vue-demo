@@ -19,7 +19,8 @@ const routes = [
   { // 动态路由
     path: '/argu/:name', // :name指动态路由参数，匹配/argu/后面的参数
     name: 'argu',
-    component: () => import('@/views/Argu.vue') // 箭头函数表示懒加载
+    component: () => import('@/views/Argu.vue'), // 箭头函数表示懒加载
+    props: true // 路由传参的布尔模式，适合动态路由中有匹配参数的配置；true表示使用router的params作为组件属性，path中匹配了name属性，就会传入到组件的props的name属性中并显示
   },
   { // 嵌套组件
     path: '/parent',
