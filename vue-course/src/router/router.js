@@ -14,7 +14,10 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
+    props: { // 路由传参的对象模式
+      food: 'banana'
+    }
   },
   { // 动态路由
     path: '/argu/:name', // :name指动态路由参数，匹配/argu/后面的参数
