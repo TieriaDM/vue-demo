@@ -9,7 +9,15 @@ const routes = [
     component: Home, // vue组件
     props: route => ({ // 路由传参的函数模式
       food: route.query.food
-    })
+    }),
+    beforeEnter: (to, from, next) => { // 单页面守卫
+      // if (from.name === 'login') {
+      //   alert('comes from login page')
+      // } else {
+      //   alert('not from login page')
+      // }
+      next() // 不能少，必须有，否则不会跳转到这个页面
+    }
   },
   { // 命名路由
     path: '/about',
@@ -48,6 +56,11 @@ const routes = [
       // <router-view name="email"/> 这里由name字段对应的映射
       // <router-view name="tel"/>
     }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/Login.vue')
   },
   { // 重定向
     path: '/main',

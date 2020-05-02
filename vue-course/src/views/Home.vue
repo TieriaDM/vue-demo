@@ -24,6 +24,21 @@ export default {
       default: 'yuki'
     }
   },
+  beforeRouteEnter (to, from, next) { // 被路由触发，要进入这个页面还没有渲染的时候调用
+    // 这里用this获取不到组件实例的，只能在next中获取到组件实例
+    next()
+    // next(vm => {
+    //   console.log(vm)
+    // })
+  },
+  beforeRouteLeave (to, from, next) {
+    // 在页面进行了编辑，没有保存就离开的情况下，提醒用户是否没有保存就离开，可以用这个方法
+    // 在即将离开页面的时候调用
+    const leave = confirm('您确定要离开吗？')
+    if (leave) next()
+    else next(false)
+    // 这里是可以使用this的
+  },
   methods: {
     handleClick (type) {
       if (type == 'back') {

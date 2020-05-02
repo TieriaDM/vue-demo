@@ -14,6 +14,12 @@ export default {
       type: String,
       default: 'lisi'
     }
+  },
+  beforeRouteUpdate (to, from, next) {
+    // 组件路由发生变化，组件复用的情况下调用
+    console.log(to.name, from.name)
+    // next() 不调next也可以
+    // 这里是可以使用this的
   }
 }
 </script>
