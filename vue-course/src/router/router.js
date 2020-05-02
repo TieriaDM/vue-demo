@@ -6,7 +6,10 @@ const routes = [
     path: '/', // url路径
     alias: '/home_page', // 别名
     name: 'Home', // 命名
-    component: Home // vue组件
+    component: Home, // vue组件
+    props: route => ({ // 路由传参的函数模式
+      food: route.query.food
+    })
   },
   { // 命名路由
     path: '/about',

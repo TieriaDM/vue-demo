@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <b>{{ food }}</b>
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <button @click="handleClick('back')">返回上一页</button>
@@ -16,6 +17,12 @@ export default {
   name: 'Home',
   components: {
     HelloWorld
+  },
+  props: {
+    food: {
+      type: String,
+      default: 'yuki'
+    }
   },
   methods: {
     handleClick (type) {
