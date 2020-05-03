@@ -8,6 +8,9 @@ const mutations = {
   },
   SET_APP_VERSION (state, params) {
     vue.set(state, 'appVersion', params.version)
+  },
+  SET_STATE_VALUE (state, params) {
+    state.stateValue = params
   }
 }
 export default mutations

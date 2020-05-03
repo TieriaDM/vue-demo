@@ -1,8 +1,9 @@
 <template>
   <div>
     <!-- 绑定子组件的value属性到inputValue上，并且注册input事件，接收子组件发射的消息 -->
-    <a-input :value="inputValue" @subInput="handleSubInput" />
-    <p>{{ inputValue }} -> last letter is {{inputValueLastLetter}}</p>
+    <!-- <a-input :value="inputValue" @subInput="handleSubInput" /> -->
+    <a-input :value="stateValue" @subInput="handleStateValueChange" />
+    <p>{{ stateValue }} -> last letter is {{inputValueLastLetter}}</p>
     <!-- 对content属性绑定inputValue的值 -->
     <a-show :content="inputValue" />
     <p>appname: {{ appName }}</p>
@@ -45,7 +46,8 @@ export default {
       appName: state => state.appName, // state代表根节点的state
       // userName: state => state.user.userName
       appVersion: state => state.appVersion,
-      todoList: state => state.user.todo ? state.user.todo.todoList : []
+      todoList: state => state.user.todo ? state.user.todo.todoList : [],
+      stateValue: state => state.stateValue
     }),
 
     ...mapState('user', { // 开启了命名空间
@@ -67,6 +69,7 @@ export default {
   methods: {
     ...mapMutations([ // 根模块或未开启命名空间的子模块的写法
       'SET_APP_NAME',
+      'SET_STATE_VALUE'
     ]),
     ...mapMutations('user', [ // 开启命名空间子模块mutation的写法
       'SET_FUCK_USER_NAME',
@@ -89,7 +92,7 @@ export default {
       } else if (type === 'actions') {
         this.updateAppName()
         // 如果不用mapActions，则写法是这样的，参数与mutation的用法一样
-        this.$store.dispatch('updateAppName', '123')
+        // this.$store.dispatch('updateAppName', '123')
       }
     },
     handleChangeUserName () {
@@ -101,6 +104,10 @@ export default {
           todoList: ['学习', '吃饭'],
         }
       })
+    },
+    handleStateValueChange (value) {
+      // this.$store.commit('SET_STATE_VALUE', value)
+      this.SET_STATE_VALUE(value)
     }
   }
 }

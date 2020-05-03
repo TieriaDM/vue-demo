@@ -1,4 +1,5 @@
 const state = {
-  appName: 'myapp'
+  appName: 'myapp',
+  stateValue: 'abc'
 }
 export default state
