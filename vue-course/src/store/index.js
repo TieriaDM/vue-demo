@@ -10,6 +10,7 @@ import saveInLocal from './plugin/saveInLocal'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  strict: process.env.NODE_ENV === 'development', // 严格模式，如果用赋值形式在组件内对state进行修改会报错
   state,
   getters,
   mutations,
