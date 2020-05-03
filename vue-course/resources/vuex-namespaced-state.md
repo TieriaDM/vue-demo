@@ -40,9 +40,12 @@ const { mapState } = createNamespacedHelpers('user') // 这里配置开启了命
 ```javascript
 import { mapState } from 'vuex'
 
-...mapState('user', {
-	userName: state => state.userName // 这里就不用写模块名称了
-})
+  ...mapState({ // 带模块和不带模块的写法可以并行共存
+    appName: state => state.appName, // state代表根节点的state
+  }),
+	...mapState('user', {
+		userName: state => state.userName // 这里就不用写模块名称了
+	})
 ```
 
 
