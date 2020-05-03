@@ -9,7 +9,9 @@ const getters = {
 }
 
 const mutations = {
-
+  SET_FUCK_USER_NAME (state, params) {
+    state.userName = params
+  }
 }
 
 const actions = {
