@@ -18,5 +18,5 @@ export default new Vuex.Store({
   modules: {
     user
   },
-  plugins: [ saveInLocal ]
+  // plugins: [ saveInLocal ] // 插件
 })
