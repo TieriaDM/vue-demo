@@ -15,7 +15,12 @@ const mutations = {
 }
 
 const actions = {
-
+  updateUserName ({ commit, state, rootState, dispatch}) {
+    // commit：用来提交mutation
+    // state：当前实例的state
+    // rootState：根实例的state
+    // dispatch：用来提交action
+  }
 }
 
 export default {
@@ -23,5 +28,8 @@ export default {
   getters, // 上面增加了getters之后要记得挂载，否则会报unknown getter错误
   state,
   mutations,
-  actions
+  actions,
+  modules: { // 子模块也可以包含子模块
+
+  }
 }

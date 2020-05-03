@@ -12,6 +12,8 @@
     <button @click="handleChangeAppName('actions')">actions修改appname</button>
     <p><b>{{ appVersion }}</b></p>
     <button @click="handleChangeUserName">修改用户名</button>
+    <button @click="registerModule">动态注册模块</button>
+    <p v-for="(li, index) in todoList" :key="index">{{ li }}</p>
   </div>
 </template>
 
@@ -42,7 +44,8 @@ export default {
     ...mapState({ // 这种写法等同于上面注释部分的写法，未使用命名空间时使用
       appName: state => state.appName, // state代表根节点的state
       // userName: state => state.user.userName
-      appVersion: state => state.appVersion
+      appVersion: state => state.appVersion,
+      todoList: state => state.user.todo ? state.user.todo.todoList : []
     }),
 
     ...mapState('user', { // 开启了命名空间
@@ -91,6 +94,13 @@ export default {
     },
     handleChangeUserName () {
       this.SET_FUCK_USER_NAME('wangwu')
+    },
+    registerModule () {
+      this.$store.registerModule(['user', 'todo'], { // ['user', 'todo'] 这样写的意思是给user模块增加一个叫todo的子模块
+        state: { // 这里的state、mutations、actions等的写法与文件模块学法是一样的
+          todoList: ['学习', '吃饭'],
+        }
+      })
     }
   }
 }
