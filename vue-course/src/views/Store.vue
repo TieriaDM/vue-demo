@@ -2,20 +2,21 @@
   <div>
     <!-- 绑定子组件的value属性到inputValue上，并且注册input事件，接收子组件发射的消息 -->
     <a-input :value="inputValue" @subInput="handleSubInput" />
-    <p>{{ inputValue }}</p>
+    <p>{{ inputValue }} -> last letter is {{inputValueLastLetter}}</p>
     <!-- 对content属性绑定inputValue的值 -->
     <a-show :content="inputValue" />
     <p>appname: {{ appName }}</p>
-    <p>username: {{ userName }}</p>
+    <p>username: {{ userName }}, first letter is {{ firstLetter }}</p>
+    <p>appNameWithVersion: {{ appNameWithVersion }}</p>
   </div>
 </template>
 
 <script>
 import AInput from '_c/AInput'
 import AShow from '_c/AShow'
-// import { mapState } from 'vuex' // 没有使用命名空间时可以这样使用
-import { createNamespacedHelpers } from 'vuex' // 开启了命名空间时使用
-const { mapState } = createNamespacedHelpers('user')
+import { mapState, mapGetters } from 'vuex' // 没有使用命名空间时可以这样使用
+// import { createNamespacedHelpers } from 'vuex' // 开启了命名空间时使用
+// const { mapState } = createNamespacedHelpers('user')
 export default {
   name: 'store',
   data() {
@@ -27,21 +28,33 @@ export default {
     AInput, AShow
   },
   computed: { // 计算型属性
-    appName () {
-      return this.$store.state.appName // 根节点的state
-    },
+    // appName () {
+    //   return this.$store.state.appName // 根节点的state
+    // },
     // userName () {
     //   return this.$store.state.user.userName // 注意模块里面的要带模块名
     // }
 
-    // ...mapState({ // 这种写法等同于上面注释部分的写法，未使用命名空间时使用
-    //   appName: state => state.appName, // state代表根节点的state
-    //   userName: state => state.user.userName
-    // })
+    ...mapState({ // 这种写法等同于上面注释部分的写法，未使用命名空间时使用
+      appName: state => state.appName, // state代表根节点的state
+      // userName: state => state.user.userName
+    }),
 
-    ...mapState({ // 开启了命名空间
+    ...mapState('user', { // 开启了命名空间
       userName: state => state.userName // 开启了命名空间就不用写模块名称了
-    })
+    }),
+    inputValueLastLetter () {
+      return this.inputValue.substr(-1, 1)
+    },
+    // appNameWithVersion () { // 获取getters的常规写法
+    //   return this.$store.getters.appNameWithVersion
+    // },
+    ...mapGetters([ // 根getters使用mapGetters的写法
+      'appNameWithVersion'
+    ]),
+    ...mapGetters('user', [ // 模块内部getters的写法
+      'firstLetter'
+    ])
   },
   methods: {
     // 实现handleInput方法
